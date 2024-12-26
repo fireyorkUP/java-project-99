@@ -1,5 +1,21 @@
+server:
+  port: 8080
+rsa:
+  private-key: classpath:certs/private.pem
+  public-key: classpath:certs/public.pem
 spring:
+  application:
+    name: app
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+      generate-ddl: true
+  output:
+    ansi:
+      enabled: always
+  profiles:
+    default: development
+sentry:
+  dsn: https://51ac60a404007fb17f9917ed1c1110dd@o4508530864553984.ingest.de.sentry.io/4508530869665873
+  traces-sample-rate: 1.0
