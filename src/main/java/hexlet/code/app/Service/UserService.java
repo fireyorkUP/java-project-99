@@ -1,5 +1,6 @@
 package hexlet.code.app.Service;
 
+import hexlet.code.app.Exception.ResourceNotFoundException;
 import hexlet.code.app.dto.user.UserCreateDTO;
 import hexlet.code.app.dto.user.UserDTO;
 import hexlet.code.app.dto.user.UserUpdateDTO;
@@ -15,7 +16,6 @@ import java.util.List;
 public class UserService {
 
     private UserRepository userRepository;
-    private UserDTO UserDTO;
     private UserMapper userMapper;
 
     public List<UserDTO> getAll() {
@@ -25,7 +25,7 @@ public class UserService {
 
     public UserDTO getById(Long id) {
         var user = userRepository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
         return userMapper.map(user);
     }
 
@@ -37,7 +37,7 @@ public class UserService {
 
     public UserDTO update(UserUpdateDTO userData, Long id) {
         var user = userRepository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
         userMapper.update(userData, user);
         userRepository.save(user);
         return userMapper.map(user);

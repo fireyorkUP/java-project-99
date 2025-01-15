@@ -19,3 +19,4 @@ spring:
 sentry:
   dsn: https://51ac60a404007fb17f9917ed1c1110dd@o4508530864553984.ingest.de.sentry.io/4508530869665873
   traces-sample-rate: 1.0
+
