@@ -1,11 +1,11 @@
 FROM gradle:8.7.0-jdk21
 
-WORKDIR /app
+WORKDIR /
 
-COPY /app .
+COPY / .
 
 RUN chmod +x gradlew
 
-RUN ./gradlew installDist
+RUN gradle installDist
 
-CMD ./build/install/app/bin/app
+CMD ./build/install/app/bin/app --spring.profiles.active=production
