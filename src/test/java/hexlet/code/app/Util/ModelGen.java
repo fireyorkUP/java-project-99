@@ -10,43 +10,38 @@ import hexlet.code.app.Repository.TaskStatusRepository;
 import hexlet.code.app.Repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import net.datafaker.Faker;
 import org.instancio.Instancio;
 import org.instancio.Model;
 import org.instancio.Select;
 import org.openapitools.jackson.nullable.JsonNullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Getter
 @Component
 @RequiredArgsConstructor
 public class ModelGen {
-    Faker faker = new Faker();
-    private Model<User> user;
-    private Model<UserCreateDTO> createUserDTO;
-    private Model<UserUpdateDTO> updateUserDTO;
-    private Model<TaskStatus> taskStatus;
-    private Model<Label> label;
-    private Model<Task> task;
 
-    @NonNull
+    private Model<User> userModel;
+    private Model<UserCreateDTO> userCreateDTOModel;
+    private Model<UserUpdateDTO> userUpdateDTOModel;
+    private Model<TaskStatus> taskStatusModel;
+    private Model<Label> labelModel;
+    private Model<Task> taskModel;
+
+    private Faker faker = new Faker();
+
+    @Autowired
     private UserRepository userRepository;
 
-    @NonNull
+    @Autowired
     private TaskStatusRepository taskStatusRepository;
 
     @PostConstruct
     private void init() {
-        createUserModel();
-        createTaskStatusModel();
-        createLabelModel();
-        createTaskModel();
-    }
-
-    public void createUserModel() {
-        user = Instancio.of(User.class)
+        userModel = Instancio.of(User.class)
                 .ignore(Select.field(User::getId))
                 .supply(Select.field(User::getFirstName), () -> faker.name().firstName())
                 .supply(Select.field(User::getLastName), () -> faker.name().lastName())
@@ -56,40 +51,34 @@ public class ModelGen {
                 .ignore(Select.field(User::getUpdatedAt))
                 .toModel();
 
-        createUserDTO = Instancio.of(UserCreateDTO.class)
+        userCreateDTOModel = Instancio.of(UserCreateDTO.class)
                 .supply(Select.field(UserCreateDTO::getEmail), () -> faker.internet().emailAddress())
                 .supply(Select.field(UserCreateDTO::getFirstName), () -> JsonNullable.of(faker.name().firstName()))
                 .supply(Select.field(UserCreateDTO::getLastName), () -> JsonNullable.of(faker.name().lastName()))
                 .supply(Select.field(UserCreateDTO::getPassword), () -> faker.internet().password())
                 .toModel();
 
-        updateUserDTO = Instancio.of(UserUpdateDTO.class)
+        userUpdateDTOModel = Instancio.of(UserUpdateDTO.class)
                 .supply(Select.field(UserUpdateDTO::getEmail), () -> JsonNullable.of(faker.internet().emailAddress()))
                 .supply(Select.field(UserUpdateDTO::getPassword), () -> JsonNullable.of(faker.internet().password()))
                 .supply(Select.field(UserUpdateDTO::getFirstName), () -> JsonNullable.of(faker.name().firstName()))
                 .supply(Select.field(UserUpdateDTO::getLastName), () -> JsonNullable.of(faker.name().lastName()))
                 .toModel();
-    }
 
-    public void createTaskStatusModel() {
-        taskStatus = Instancio.of(TaskStatus.class)
+        taskStatusModel = Instancio.of(TaskStatus.class)
                 .ignore(Select.field(TaskStatus::getId))
                 .supply(Select.field(TaskStatus::getName), () -> faker.lorem().characters(3, 100))
                 .supply(Select.field(TaskStatus::getSlug), () -> faker.internet().slug())
                 .ignore(Select.field(TaskStatus::getCreatedAt))
                 .toModel();
-    }
 
-    public void createLabelModel() {
-        label = Instancio.of(Label.class)
+        labelModel = Instancio.of(Label.class)
                 .ignore(Select.field(Label::getId))
                 .ignore(Select.field(Label::getCreatedAt))
-                .supply(Select.field(Label::getName), () -> faker.lorem().characters(3, 100))
+                .supply(Select.field(Label::getName), () -> faker.lorem().characters(3, 200))
                 .toModel();
-    }
 
-    public void createTaskModel() {
-        task = Instancio.of(Task.class)
+        taskModel = Instancio.of(Task.class)
                 .ignore(Select.field(Task::getId))
                 .ignore(Select.field(Task::getLabels))
                 .ignore(Select.field(Task::getAssignee))
@@ -100,4 +89,5 @@ public class ModelGen {
                 .supply(Select.field(Task::getDescription), () -> faker.lorem().word())
                 .toModel();
     }
+
 }

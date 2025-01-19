@@ -7,6 +7,7 @@ import hexlet.code.app.dto.taskStatus.UpdateTaskStatusDTO;
 import hexlet.code.app.Mapper.TaskStatusMapper;
 import hexlet.code.app.Repository.TaskStatusRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -14,7 +15,10 @@ import java.util.List;
 @AllArgsConstructor
 public class TaskStatusService {
 
+    @Autowired
     private TaskStatusRepository repository;
+
+    @Autowired
     private TaskStatusMapper statusMapper;
 
     public List<TaskStatusDTO> getAll() {

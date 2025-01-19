@@ -5,6 +5,7 @@ import hexlet.code.app.Model.TaskStatus;
 import hexlet.code.app.Repository.LabelRepository;
 import hexlet.code.app.Repository.TaskStatusRepository;
 import hexlet.code.app.Repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -16,9 +17,16 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class DataInitializer implements ApplicationRunner {
 
+    @Autowired
     private final CustomUserDetailsService userService;
+
+    @Autowired
     private final TaskStatusRepository statusRepository;
+
+    @Autowired
     private final LabelRepository labelRepository;
+
+    @Autowired
     private final UserRepository userRepository;
 
     @Override

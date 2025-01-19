@@ -21,36 +21,36 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping(path = "/api/labels")
 public class LabelsController {
 
     private final LabelService labelService;
 
-    @GetMapping(path = "/labels")
-    public ResponseEntity<List<LabelDTO>> index() {
+    @GetMapping
+    public ResponseEntity<List<LabelDTO>> getAll() {
         var labels = labelService.getAll();
         return ResponseEntity.ok()
                 .header("X-Total-Count", String.valueOf(labels.size()))
                 .body(labels);
     }
 
-    @GetMapping(path = "/labels/{id}")
+    @GetMapping(path = "/{id}")
     public LabelDTO show(@PathVariable Long id) {
         return labelService.getById(id);
     }
 
-    @PostMapping(path = "/labels")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public LabelDTO create(@Valid @RequestBody CreateLabelDTO dataDTO) {
         return labelService.create(dataDTO);
     }
 
-    @PutMapping(path = "/labels/{id}")
+    @PutMapping(path = "/{id}")
     public LabelDTO update(@Valid @RequestBody UpdateLabelDTO dataDTO, @PathVariable Long id) {
         return labelService.update(dataDTO, id);
     }
 
-    @DeleteMapping(path = "/labels/{id}")
+    @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void destroy(@PathVariable Long id) {
         labelService.delete(id);

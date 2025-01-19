@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/task_statuses")
-public class TaskStatusesController {
+public class TaskStatusController {
     private TaskStatusService service;
 
     @GetMapping()

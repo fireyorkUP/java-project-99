@@ -9,6 +9,7 @@ import hexlet.code.app.Mapper.TaskMapper;
 import hexlet.code.app.Repository.TaskRepository;
 import hexlet.code.app.Component.TaskSpecification;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -16,8 +17,13 @@ import java.util.List;
 @AllArgsConstructor
 public class TaskService {
 
+    @Autowired
     private TaskRepository repository;
+
+    @Autowired
     private TaskMapper taskMapper;
+
+    @Autowired
     private TaskSpecification taskSpecification;
 
     public List<TaskDTO> getAll(TaskParamsDTO params) {

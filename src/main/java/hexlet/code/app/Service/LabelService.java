@@ -7,21 +7,21 @@ import hexlet.code.app.dto.label.UpdateLabelDTO;
 import hexlet.code.app.Mapper.LabelMapper;
 import hexlet.code.app.Repository.LabelRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @AllArgsConstructor
 @Service
 public class LabelService {
-
+    @Autowired
     private LabelRepository repository;
+
+    @Autowired
     private LabelMapper labelMapper;
 
     public List<LabelDTO> getAll() {
-        var labels = repository.findAll();
-        return labels.stream()
-                .map(labelMapper::map)
-                .toList();
+        return repository.findAll().stream().map(labelMapper::map).toList();
     }
 
     public LabelDTO getById(Long id) {

@@ -20,6 +20,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "labels")
 @EntityListeners(AuditingEntityListener.class)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Label implements BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +28,7 @@ public class Label implements BaseEntity {
     private Long id;
 
     @Column(unique = true)
-    @Size(min = 3, max = 1000)
+    @Size(min = 2, max = 255)
     private String name;
 
     @CreatedDate

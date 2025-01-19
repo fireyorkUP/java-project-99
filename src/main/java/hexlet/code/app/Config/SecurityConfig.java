@@ -2,6 +2,7 @@ package hexlet.code.app.Config;
 
 import hexlet.code.app.Service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,8 +26,13 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    @Autowired
     private final JwtDecoder jwtDecoder;
+
+    @Autowired
     private final PasswordEncoder passwordEncoder;
+
+    @Autowired
     private final CustomUserDetailsService userService;
 
     @Bean

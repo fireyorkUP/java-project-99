@@ -3,6 +3,7 @@ package hexlet.code.app.Util;
 import hexlet.code.app.Model.User;
 import hexlet.code.app.Repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserUtils {
 
+    @Autowired
     private final UserRepository userRepository;
 
     public User getCurrentUser() {
