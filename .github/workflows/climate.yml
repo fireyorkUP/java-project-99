@@ -17,11 +17,8 @@ jobs:
       - uses: gradle/gradle-build-action@v3
         with:
           gradle-version: 8.7
-      - run: make test
-      - run: make report
-      - run: make lint
-      - name: Publish code coverage
-        uses: paambaati/codeclimate-action@v5.0.0
+          arguments: build
+      - uses: paambaati/codeclimate-action@v5.0.0
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
           JACOCO_SOURCE_PATH: src/main/java
