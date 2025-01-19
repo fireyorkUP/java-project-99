@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class LabelService {
+
     @Autowired
     private LabelRepository repository;
 
