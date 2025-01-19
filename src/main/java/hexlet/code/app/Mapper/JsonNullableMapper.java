@@ -19,7 +19,7 @@ public abstract class JsonNullableMapper {
     }
 
     @Condition
-    public <T> boolean isPresent(JsonNullable<T> JsonNullable) {
-        return JsonNullable != null && JsonNullable.isPresent();
+    public <T> boolean isPresent(JsonNullable<T> jsonNullable) {
+        return jsonNullable != null && jsonNullable.isPresent();
     }
 }
