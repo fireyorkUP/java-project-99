@@ -6,13 +6,11 @@ import hexlet.code.repository.LabelRepository;
 import hexlet.code.repository.TaskStatusRepository;
 import hexlet.code.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import hexlet.code.service.CustomUserDetailsService;
 import hexlet.code.model.User;
-import lombok.AllArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
