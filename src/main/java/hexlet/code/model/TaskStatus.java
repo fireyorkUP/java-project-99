@@ -29,6 +29,7 @@ public class TaskStatus implements BaseEntity {
 
     @NotNull
     @Size(min = 1)
+    @Column
     private String name;
 
     @NotNull

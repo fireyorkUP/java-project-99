@@ -46,7 +46,6 @@ public class Task implements BaseEntity {
     private String description;
 
     @CreatedDate
-    @Column
     private LocalDate createdAt;
 
     @NotNull
